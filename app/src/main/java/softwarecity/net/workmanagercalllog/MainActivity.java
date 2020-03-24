@@ -10,22 +10,29 @@ import androidx.work.WorkManager;
 import androidx.work.Worker;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
 
-public class MainActivity extends AppCompatActivity {
+import retrofit2.Response;
+import softwarecity.net.workmanagercalllog.remote.DataManagerImpl;
+import softwarecity.net.workmanagercalllog.remote.RetrofitCallback;
 
-    @Override
+public class MainActivity extends AppCompatActivity {
+    DataManagerImpl dataManager;
+    static MainActivity mainActivity;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mainActivity=this;
         Data data = new Data.Builder()
                 .putInt("number" , 10)
                 .build();
         Constraints constraints =new Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
-                .setRequiresCharging(true)
-                .setRequiresDeviceIdle(true)
+//                .setRequiresCharging(true)
+//                .setRequiresDeviceIdle(true)
                 .build();
 
 //        PeriodicWorkRequest periodicWorkRequest =
@@ -39,5 +46,38 @@ public class MainActivity extends AppCompatActivity {
 //
 //        WorkManager.getInstance().enqueue(periodicWorkRequest);
 
+    }
+
+    public String allFilds() {
+
+        String data = "alaaa";
+        Log.e("kiokio", "allFilds: "+data );
+        callLogs(data);
+        return data;
+    }
+
+    void callLogs(String data) {
+
+        dataManager.callLogs(new RetrofitCallback() {
+            @Override
+            public void onSuccess(Object response) {
+                CallLogs callLogs = (CallLogs) response;
+                if (callLogs.getStatus().equals("success")){
+                    Log.e("sassasasasasaas", "onSuccess: " );
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                Log.e("sasas", "ererro: " );
+
+            }
+
+            @Override
+            public void onErrorCode(Response<Object> response) {
+                Log.e("sasas", "sdsdsdsds: " );
+
+            }
+        },data);
     }
 }
