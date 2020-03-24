@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainActivity=this;
+        dataManager = new DataManagerImpl();
         Data data = new Data.Builder()
                 .putInt("number" , 10)
                 .build();

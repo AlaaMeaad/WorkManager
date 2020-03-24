@@ -21,7 +21,7 @@ public class App extends Application {
 
     private void setWorkManager() {
         Constraints mConstraints =new Constraints.Builder()
-                .setRequiredNetworkType(NetworkType.CONNECTED)
+//                .setRequiredNetworkType(NetworkType.CONNECTED)
 //                .setRequiresCharging(true)
 //                .setRequiresDeviceIdle(true)
                 .build();
