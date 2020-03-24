@@ -22,6 +22,8 @@ private static final String TAG ="WorkMang";
         Data inputData = getInputData();
         int number = inputData.getInt("number" , -1);
         Log.d(TAG, "doWork: number " + number);
+
+        /*
         for (int i = number; i >0 ; i--) {
             Log.d(TAG, "doWork: was" +i);
             try {
@@ -31,6 +33,7 @@ private static final String TAG ="WorkMang";
                 return Result.failure();
             }
         }
+         */
         return Result.success();
     }
 }

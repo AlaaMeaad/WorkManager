@@ -2,7 +2,9 @@ package softwarecity.net.workmanagercalllog;
 
 import android.app.Application;
 
+import androidx.work.Constraints;
 import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.NetworkType;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
@@ -13,9 +15,22 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        setWorkManager();
+    }
+
+    private void setWorkManager() {
+        Constraints mConstraints =new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+//                .setRequiresCharging(true)
+//                .setRequiresDeviceIdle(true)
+                .build();
+
         PeriodicWorkRequest periodicWorkRequest =
                 new PeriodicWorkRequest.Builder(WorkMang.class, 15, TimeUnit.MINUTES)
-                .build();
+                        .setConstraints(mConstraints)
+                        .build();
+
         WorkManager.getInstance(this)
                 .enqueueUniquePeriodicWork("work" , ExistingPeriodicWorkPolicy.KEEP,periodicWorkRequest);
 
