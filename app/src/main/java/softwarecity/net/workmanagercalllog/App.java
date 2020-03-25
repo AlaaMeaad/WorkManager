@@ -28,11 +28,16 @@ public class App extends Application {
 
         PeriodicWorkRequest periodicWorkRequest =
                 new PeriodicWorkRequest.Builder(WorkMang.class, 15, TimeUnit.MINUTES)
-                        .setConstraints(mConstraints)
+                        //.setConstraints(mConstraints)
                         .build();
 
+        /*
         WorkManager.getInstance(this)
                 .enqueueUniquePeriodicWork("work" , ExistingPeriodicWorkPolicy.KEEP,periodicWorkRequest);
+
+         */
+
+        WorkManager.getInstance(this).enqueue(periodicWorkRequest);
 
     }
 }
