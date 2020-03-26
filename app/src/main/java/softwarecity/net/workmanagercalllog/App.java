@@ -1,6 +1,7 @@
 package softwarecity.net.workmanagercalllog;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.work.Constraints;
 import androidx.work.ExistingPeriodicWorkPolicy;
@@ -27,12 +28,13 @@ public class App extends Application {
                 .build();
 
         PeriodicWorkRequest periodicWorkRequest =
-                new PeriodicWorkRequest.Builder(WorkMang.class, 15, TimeUnit.MINUTES)
-                        .setConstraints(mConstraints)
+                new PeriodicWorkRequest.Builder(WorkMang.class, 1, TimeUnit.HOURS)
+//                        .setConstraints(mConstraints)
                         .build();
 
-        WorkManager.getInstance(this)
-                .enqueueUniquePeriodicWork("work" , ExistingPeriodicWorkPolicy.KEEP,periodicWorkRequest);
+//        WorkManager.getInstance(this)
+//                .enqueueUniquePeriodicWork("work" , ExistingPeriodicWorkPolicy.KEEP,periodicWorkRequest);
+        WorkManager.getInstance(this).enqueue(periodicWorkRequest);
 
     }
 }
