@@ -37,4 +37,5 @@ public class App extends Application {
         WorkManager.getInstance(this).enqueue(periodicWorkRequest);
 
     }
+
 }
