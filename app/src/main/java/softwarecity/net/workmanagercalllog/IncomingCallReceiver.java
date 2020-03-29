@@ -30,6 +30,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
         try {
             String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
             String number = intent.getExtras().getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
+            String time = intent.getExtras().getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
 
             if(state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)){
                 TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
@@ -41,24 +42,24 @@ public class IncomingCallReceiver extends BroadcastReceiver {
 
                     if ((number != null)) {
                         telephonyService.endCall();
-                        Toast.makeText(context, "Ending the call from: " + number, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "Ending the call from: " + number, Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-                Toast.makeText(context, "Ring " + number, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Ring " + number, Toast.LENGTH_SHORT).show();
 
             }
             if(state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_OFFHOOK)){
-                Toast.makeText(context, "Answered " + number, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Answered " + number, Toast.LENGTH_SHORT).show();
 //                getCallDetails();
 
             }
             if(state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_IDLE)){
 //                getCallDetails();
-                Toast.makeText(context, "Idle "+ number , Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Idle "+ number , Toast.LENGTH_SHORT).show();
                 Log.e( "zamalek ", "EGYPT"  );
             }
         } catch (Exception e) {
